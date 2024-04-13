@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Simple Chatbot</title>
+<style>
+    #chat-container {
+        width: 300px;
+        height: 400px;
+        border: 1px solid #ccc;
+        overflow-y: scroll;
+        padding: 10px;
+    }
+    #input-container {
+        display: flex;
+    }
+    #user-input {
+        flex: 1;
+        margin-right: 10px;
+    }
+</style>
+</head>
+<body>
+
+<div id="chat-container"></div>
+<div id="input-container">
+    <input type="text" id="user-input" placeholder="Type your message...">
+    <button onclick="sendMessage()">Send</button>
+</div>
+
+<script>
+    const chatContainer = document.getElementById('chat-container');
+    const userInput = document.getElementById('user-input');
+
+    function sendMessage() {
+        const message = userInput.value;
+        if (message.trim() === '') return;
+
+        // Display user message
+        appendMessage('You', message);
+
+        // Respond to user message
+        respondToUser(message);
+
+        // Clear input field
+        userInput.value = '';
+    }
+
+    function appendMessage(sender, message) {
+        const messageElement = document.createElement('div');
+        messageElement.innerHTML = `<strong>${sender}:</strong> ${message}`;
+        chatContainer.appendChild(messageElement);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+    }
+
+    function respondToUser(message) {
+        // Simple responses based on user input
+        let response = '';
+        if (message.includes('hi') || message.includes('hello')) {
+            response = 'Hello there!';
+        } else if (message.includes('how are you')) {
+            response = "I'm just a bot, but I'm doing well, thank you for asking!";
+        } else {
+            response = "I'm sorry, I didn't understand that.";
+        }
+
+        // Display bot response
+        setTimeout(() => {
+            appendMessage('Bot', response);
+        }, 500);
+    }
+</script>
+
+</body>
+</html>
