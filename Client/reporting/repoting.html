@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Multi Step Form with Progress Bar using jQuery and CSS3</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="./style.css">
+
+
+</head>
+
+<script>
+  $(document).ready(function() {
+    $('#msform').submit(function(e) {
+        e.preventDefault(); // Prevent default form submission
+
+        // Serialize form data
+        var formData = new FormData(this);
+        var jsonData = {}
+        for (var pair of formData.entries()) {
+          console.log(pair[0] + ': ' + pair[1]);
+        }
+
+        // Display form data (for demonstration)
+        console.log(formData);
+        $.ajax({
+          url: 'http://127.0.0.1:5000/api/toxicScore',
+          type: 'POST',
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function(response) {
+              console.log('Form data sent successfully:', response);
+              if(response.predicition=='toxic'){
+                $.ajax({
+                      url:'http://localhost:3000/api/v1/report',
+                      type:'POST',
+                      data: formData,
+                      processData:false,
+                      contentType: false,
+                      success:function(response){
+                        console.log(response)
+                        alert("successfully reported")
+                      },
+                      error:function(xhr, status, error){
+                        alert("Try Again!!")
+                      }
+                })
+              }
+              // Handle API response here
+          },
+          error: function(xhr, status, error) {
+              console.error('Failed to send form data:', error);
+              alert("Try Again!!")
+          }
+        });
+        
+
+
+        // Here you can perform additional actions, such as AJAX request
+        // For example:
+        // sendDataToBackend(formData);
+    });
+  });
+</script>
+<body>
+<!-- partial:index.partial.html -->
+<!-- multistep form -->
+<form id="msform" enctype="multipart/form-data">
+  <!-- progressbar -->
+  <ul id="progressbar">
+    <li class="active">Account Setup</li>
+    <li>Social Profiles</li>
+    <li>Personal Details</li>
+  </ul>
+  <!-- fieldsets -->
+  <fieldset>
+    <h2 class="fs-title">Create your report</h2>
+    <h3 class="fs-subtitle">This is step 1</h3>
+    <input type="text" name="userID" placeholder="User ID" />
+    <select id="platform" name="platform">
+      <option value="Instagram">Instagram</option>
+      <option value="Twitter">Twitter</option>
+      <option value="Facebook">Facebook</option>
+  </select>
+  <br>
+    
+    <!-- <input type="password" name="pass" placeholder="Password" /> -->
+    <!-- <input type="password" name="cpass" placeholder="Confirm Password" /> -->
+    <input type="button" name="next" class="next action-button" value="Next" />
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Description</h2>
+    <h3 class="fs-subtitle">Describe brief you problem</h3>
+    <!-- <input type="text" name="phone" placeholder="Phone" /> -->
+    <textarea name="desc" placeholder="Your Problem" style="height: 200px;"></textarea>
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <input type="button" name="next" class="next action-button" value="Next" />
+    
+  </fieldset>
+  <fieldset>
+    <h2 class="fs-title">Proof</h2>
+    <h3 class="fs-subtitle">of your statement</h3>
+    <input type="file" name="image" >
+    <input type="button" name="previous" class="previous action-button" value="Previous" />
+    <button class="submit action-button">Submit</button>
+  </fieldset>
+  
+</form>
+<style>
+  img {
+    width: 16vh;
+    height: 20vh;
+    display: block;
+    margin: auto;
+  }
+</style>
+<img src="../management-consulting.gif">
+<!-- partial -->
+  <script src='//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='//cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js'></script>
+<script  src="./script.js"></script>
+
+
+
+</body>
+</html>

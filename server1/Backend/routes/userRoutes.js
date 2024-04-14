@@ -1,4 +1,6 @@
 const express = require("express");
+const path = require('path'); // Import the path module
+
 const {
   registerUser,
   loginUser,
@@ -16,6 +18,7 @@ const {
 const { isAuthenticatedUser, authorizeRoles } = require("../middleware/auth");
 const { ApiFeatures } = require("../utils/apifeature");
 const { reportUser } = require("../controllers/reportingController");
+
 
 const router = express.Router();
 
@@ -50,4 +53,4 @@ router
 router.route("/search").get(isAuthenticatedUser,ApiFeatures);
 router.route("/report").post(reportUser);
 
-module.exports = router;
+module.exports = router;  

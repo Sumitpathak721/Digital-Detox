@@ -1,6 +1,7 @@
 from transformers import BertForSequenceClassification, BertTokenizer, TextClassificationPipeline
 import pytesseract
 from flask import Flask,jsonify,request
+from flask_cors import CORS
 from werkzeug.utils import secure_filename
 import os
 from PIL import Image
@@ -25,6 +26,7 @@ ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 # Configuration
 app.config['UPLOAD_FOLDER'] = 'uploads/'
 pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+cors = CORS(app, origins=['http://127.0.0.1:5501'])
 
 
 def imageToText(filename):
@@ -41,6 +43,7 @@ def predictToxic(text):
 
 @app.route('/api/toxicScore', methods=['POST'])
 async def upload_image():
+    print(request.files)
     if 'image' not in request.files:
         return jsonify({'error': 'No image provided'}), 400
 
@@ -52,7 +55,7 @@ async def upload_image():
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
         text = imageToText(filename)
-        await asyncio.sleep(2)
+        await asyncio.sleep(1)
         res = predictToxic(text)[0]
         print(res)
         

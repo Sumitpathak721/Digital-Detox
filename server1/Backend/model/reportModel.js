@@ -6,8 +6,9 @@ const userSchema1 = new mongoose.Schema({
   aggresorID:{
     type:String
   },
-  desc:{
-    type:String
+  vote:{
+    type:Number,
+    default:1
   },
 });
 userSchema1.methods.getJWTToken = function () {

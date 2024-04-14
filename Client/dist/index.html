@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Scrollspy with animated scroll and focus</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Open Sans -->
+<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+
+
+<script src="https://cdn.linearicons.com/free/1.0.0/svgembedder.min.js"></script><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+<link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css'>
+<link rel='stylesheet' href='https://codepen.io/CodeBoomer/pen/PzgWYp.css'>
+<link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+	<script>
+		// Function to fetch news from NewsAPI
+		function fetchNews() {
+			// Replace 'API_KEY' with your actual API key
+			const apiKey = 'API_KEY';
+			const url = `https://newsapi.org/v2/everything?domains=wsj.com&apiKey=${apiKey}`;
+	
+			fetch(url)
+				.then(response => response.json())
+				.then(data => {
+					// Extract news articles
+					const articles = data.articles;
+	
+					// Construct the news ticker text
+					let tickerText = '';
+					articles.forEach(article => {
+						tickerText += `${article.title} - `;
+					});
+	
+					// Display the news ticker text
+					document.getElementById('ticker').innerText = tickerText;
+				})
+				.catch(error => {
+					console.error('Error fetching news:', error);
+				});
+		}
+	
+		// Call fetchNews function when the page loads
+		window.onload = fetchNews;
+	</script>
+
+<!-- partial:index.partial.html -->
+<body data-spy="scroll" data-target="#scroll-spy">
+	
+	<!-- Navigation - Fixed Top -->
+	<nav class="navbar navbar-fixed-top">
+		
+		<div class="container-fluid">
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<a class="navbar-home" href="#home" role="button">
+					<svg class="lnr lnr-home"><use xlink:href="#lnr-home"></use></svg>
+				</a>	
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#scroll-spy" aria-expanded="false">
+					<span class="sr-only">Toggle navigation</span>
+					<i class="material-icons">&#xE5D2;</i>
+				</button>
+<!-- 				<a class="navbar-brand" href="#home">Boom Scroll
+					<i class="material-icons">mouse</i>
+				</a> -->
+			</div>
+
+			<!-- Collect the nav links, forms for toggling -->
+			<div class="collapse navbar-collapse" id="scroll-spy">
+
+				<!-- navbar-nav -->
+				<ul class="nav navbar-nav ">
+					<li><a href="#about">About</a></li>
+					<li><a href="#demo">Demo</a></li>
+					<li><a href="#features">Features</a></li>
+					<li><a href="#footer-section">Contact Us</a></li>	
+					<li><a href="/login/login.html">Register</a></li>
+							
+				</ul><!-- /.navbar-nav -->
+			</div><!-- /.navbar-collapse -->		
+		</div><!-- /.container-fluid -->
+	</nav><!-- /.fixed navigation -->
+	
+	<section id="home">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="mouse"></div>
+					<h1>Scroll</h1>
+					<h4>Digital Detox</h4>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+					<p>Best implementation of Bootstraps Scroll Spy for animated scrolling and page location</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			<div class="row">
+				<div class="col-xs-12">
+					<a class="tutorials-link" href="" role="button">Watch Videos</a>
+				</div>
+			</div>
+		</div><!-- /.container -->
+	</section><!-- /#home -->
+	<!-- <marquee><a href=""><h3>This is New news</h3></a></marquee> -->
+	<marquee  scrollamount="3" onmouseover="this.stop();" onmouseout="this.start();" id="marquee">
+		<a href="#" id="loadNewsLink"><h3>Click here to load news</h3></a>
+	</marquee>
+	
+	
+	<section id="about">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						About
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->	
+			<div class="row">
+				<div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+					<p>Welcome to <b>DIGITAL DETOX</b> where safety and support meet innovation. Our platform is dedicated to combating online toxicity and abuse through cutting-edge AI technology and compassionate support systems. <br><b>AI-Powered Protection:</b> We use advanced AI models to identify and flag toxic comments, creating a safer digital space for all users.<br><b>Empowering Users: </b>Our transparent rating system helps users make informed decisions about their interactions.<br>
+					<b>Seamless Protection</b>: With our Chrome extension, offensive comments can be easily blurred, giving you control over your online experience.<br><b>Stay Informed:</b> Receive real-time news headlines and email updates about the most toxic users, empowering you to stay vigilant and protect yourself and others.<br><b>24/7 Support: </b>Our chatbot mentor is always available to provide emotional support and vital information, ensuring you feel supported and empowered in every situation.</p>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</section><!-- /#about -->	
+	
+	<section id="demo">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						Demo
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->	
+			<div class="row">
+				<div class="video-roll--container col-xs-12">
+					<ul class="video-roll">
+						<li><a href="" target="_blank"></a></li>
+						<li><a href="" target="_blank"></a></li>
+						<li><a href="" target="_blank"></a></li>
+					</ul>				
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			<div class="row">
+				<div class="col-xs-12 text-center">		
+					<a class="tutorials-link" href="" role="button">Watch Videos</a>	
+					<h4>Check out my YouTube tutorials</h4>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+	</section>	
+
+	<section id="features">
+		<div class="container">
+			<div class="row">
+				<div class="col-xs-12">
+					<div class="section-header">
+						Features
+					</div>
+				</div><!-- /.col -->
+			</div><!-- /.row -->
+			
+			<div class="row">
+				<div class="feature-container col-xs-12">
+					<div class="row">
+						<div class="feature col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-0 text-center">
+							<svg class="lnr lnr-magic-wand"><use xlink:href="#lnr-magic-wand"></use></svg>
+							<h4>Reporting</h4>
+							<a class="tutorials-link" href="../reporting/repoting.html" role="button">More</a>	
+							<!-- <p>Smooth, animated scroll between navigation links</p> -->
+						</div><!-- /.feature -->
+
+						<div class="feature col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 text-center">
+							<svg class="lnr lnr-map-marker"><use xlink:href="#lnr-map-marker"></use></svg>
+							<h4>Searching</h4>
+							<a class="tutorials-link" href="../seaching/search.html" role="button">More</a>	
+							<!-- <p>Track page locations when scrolling</p> -->
+						</div><!-- /.feature -->
+
+						<div class="feature col-xs-10 col-xs-offset-1 col-sm-4 col-sm-offset-0 text-center">
+							<svg class="lnr lnr-bullhorn"><use xlink:href="#lnr-bullhorn"></use></svg>
+							<h4>chatbot Assistant</h4>
+							<a class="tutorials-link" href="" role="button">More</a>	
+							<!-- <p>Draw user attention to navigated sections</p> -->
+						</div><!-- /.feature -->
+					</div><!-- /.row -->
+				</div><!-- /.feature-container -->
+
+			</div><!-- /.row -->
+		</div><!-- /.container -->
+		
+			</section>
+	<footer class="footer-section" id="footer-section">
+		<div class="container">
+            <div class="footer-cta pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <div class="cta-text">
+                                <h4>Find us</h4>
+                                <span>1010 Avenue, sw 54321, chandigarh</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="fas fa-phone"></i>
+                            <div class="cta-text">
+                                <h4>Call us</h4>
+                                <span>9876543210 0</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-md-4 mb-30">
+                        <div class="single-cta">
+                            <i class="far fa-envelope-open"></i>
+                            <div class="cta-text">
+                                <h4>Mail us</h4>
+                                <span>mail@info.com</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-content pt-5 pb-5">
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 mb-50">
+                        <div class="footer-widget">
+                            
+                            <div class="footer-text">
+                                <p>Lorem ipsum dolor sit amet, consec tetur adipisicing elit, sed do eiusmod tempor incididuntut consec tetur adipisicing
+                                elit,Lorem ipsum dolor sit amet.</p>
+                            </div>
+                            <div class="footer-social-icon">
+                                <span>Follow us</span>
+                                <a href="#"><i class="fab fa-facebook-f facebook-bg"></i></a>
+                                <a href="#"><i class="fab fa-twitter twitter-bg"></i></a>
+                                <a href="#"><i class="fab fa-google-plus-g google-bg"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-30">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Useful Links</h3>
+                            </div>
+                           
+                        </div>
+                    </div>
+                    <div class="col-xl-4 col-lg-4 col-md-6 mb-50">
+                        <div class="footer-widget">
+                            <div class="footer-widget-heading">
+                                <h3>Subscribe</h3>
+                            </div>
+                            <div class="footer-text mb-25">
+                                <p>Don’t miss to subscribe to our new feeds, kindly fill the form below.</p>
+                            </div>
+                            <div class="subscribe-form">
+                                <form action="#">
+                                    <input type="text" placeholder="Email Address">
+                                    <button><i class="fab fa-telegram-plane"></i></button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copyright-area">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 text-center text-lg-left">
+                        <div class="copyright-text">
+                           
+                        </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 d-none d-lg-block text-right">
+                        <div class="footer-menu">
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+			
+	</footer>
+	<a href="#home" role="button" class="scrollTop">
+		<svg class="lnr lnr-chevron-up"><use xlink:href="#lnr-chevron-up"></use></svg>
+	</a>
+</body><!-- partial -->
+<script>
+    // Fetch data from the News API
+    fetch('https://newsapi.org/v2/top-headlines?country=us&category=business&apiKey=YOUR_API_KEY')
+        .then(response => response.json())
+        .then(data => {
+            const headlines = data.articles;
+            const headlinesList = document.getElementById('headlines');
+
+            // Iterate through the headlines and add them to the list
+            headlines.forEach(headline => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.href = headline.url;
+                link.textContent = headline.title;
+                listItem.appendChild(link);
+                headlinesList.appendChild(listItem);
+            });
+        })
+        .catch(error => console.error('Error fetching headlines:', error));
+</script>
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+<script src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'></script><script  src="./script.js"></script>
+
+</body>
+</html>
