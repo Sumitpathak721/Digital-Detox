@@ -10,7 +10,7 @@ const imagePath = 'path/to/image.jpg';
 
 exports.reportUser = catchAsyncErrors(async (req, res, next) => {
     // http://127.0.0.1:5000/api/toxicScore
-    console.log("storing in db")
+    console.log("storing in DB")
     
     let user = await userSchema1.find(aggressorID)
     if(user){

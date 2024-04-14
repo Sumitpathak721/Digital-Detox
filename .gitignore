@@ -1,3 +1,4 @@
 /models/__pycache__
-/server1/node_modules
-/server1/package-lock.json
+/flaskServer/__pycache__
+/NodeServer/node_modules
+/NodeServer/package-lock.json
